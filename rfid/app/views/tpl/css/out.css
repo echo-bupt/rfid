@@ -1,0 +1,34 @@
+li.con0{
+	border-bottom:1px solid #ccc;
+	padding-bottom: 30px;
+	position: relative;
+}
+input.deleteBtn{
+	position: absolute;
+	right:100px;
+	bottom: 5px;
+}
+input.updateBtn{
+	position: absolute;
+	right:100px;
+	bottom: 5px;
+}
+li.con1{
+	border-bottom:1px solid #ccc;
+	padding-bottom: 30px;
+	position: relative;
+}
+#succnotice{
+	color:green;
+	display: none;
+	position: absolute;
+	right: 120px;
+	bottom: 60px;
+}
+.erronotice{
+	color:green;
+	display: none;
+	position: absolute;
+	right: 120px;
+	bottom: 60px;
+}

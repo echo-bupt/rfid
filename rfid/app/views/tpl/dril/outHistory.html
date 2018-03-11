@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link href="{{$TPL}}/css/public.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{$TPL}}/js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="{{$TPL}}/js/public.js"></script>
+<body>
+<div id="map">
+	<span class='title'>钻具出库记录</span>
+</div>
+<div id="content" style="text-align:center;">
+	<a class="btn-small-f btn-mini btn-info" style="float:right;" href="/dril/outAdd">+</a>
+	<table id="table" class='table table-striped table-bordered'>
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>下拨二级单位</th>
+				<th>下属井队编号</th>
+				<th>出库办理人员</th>
+				<th>领取人员</th>
+				<th>领取日期</th>
+				<th>归还人员</th>
+				<th>归还日期</th>
+				<?php if($_SESSION['super']==1){?>
+				<th>操作</th>
+				<?php }?>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 有信息的展示 没信息的增加一个 添加功能栏 -->
+			{{if $data}}
+			{{foreach $data child}}
+				<tr>
+					<td>{{$epc}}</td>
+					<td>{{$child.unit}}</td>
+					<td>{{$child.troop}}</td>
+					<td>{{$child.operator}}</td>
+					<td>{{$child.picker}}</td>
+					<td>{{$child.picktime}}</td>
+					{{if $child.isback!=0}}
+					<td>{{$child.backer}}</td>
+					<td>{{$child.backtime}}</td>
+					{{else}}
+					<td colspan="2">该钻具未归还</td>
+					{{/if}}
+					<?php if($_SESSION['super']==1){?>
+					<td>
+						<a class='btn btn-small-f edit' href="/dril/outEdit/oid/{{$child.oid}}">编辑</a>
+						<a class='btn btn-small-f del'  href="/dril/outDelete/did/{{$child.did}}">删除</a>
+					</td>
+					<?php }?>
+				</tr>
+			{{/foreach}}
+			{{else}}
+			<h2>该钻具没有历史出库记录<a class='btn btn-small-f edit' href="/dril/out">返回</a></h2>
+			{{/if}}
+		</tbody>
+	</table>
+	
+	<div id="page">
+				{{$page}}
+	</div>
+</div>
+</body>
+</html>

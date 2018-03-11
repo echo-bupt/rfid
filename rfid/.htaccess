@@ -1,0 +1,6 @@
+#路由重写机制
+<IfModule rewrite_module>
+    RewriteEngine On
+    RewriteCond $1 !^(.*)(\.(js|css|ttf|php|png|jpg|html)$|.*images|.*third|.*upload) 
+    RewriteRule (.*)$ /index.php
+</IfModule>

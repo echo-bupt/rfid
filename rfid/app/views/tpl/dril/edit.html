@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link href="{{$TPL}}/css/public.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{$TPL}}/js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="{{$TPL}}/js/send.js"></script>
+<script type="text/javascript" src='/third/DatePicker/WdatePicker.js'></script>
+<body>
+<div id="content">
+	<form id="tool" action="/dril/edit" method="post">
+	<table class='table table-striped table-bordered'>
+		<thead>
+			<tr>
+				<th width="20%">名称</th>
+				<th>值</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{foreach $pdata v}}
+			<tr>
+				<td width="30%">{{$v.nickname}}</td>
+				<td>
+					{{if $v.pname=='cid'}}
+						<select name='cid' style="width:155px;height:30px;text-align:center;">
+						{{foreach $sort val}}
+							{{if $val.cid==$data.cid}}
+							<option value='{{$val.cid}}' selected='selected'>{{$val.cname}}</option>	
+							{{else}}
+							<option value='{{$val.cid}}'>{{$val.cname}}</option>
+							{{/if}}
+						{{/foreach}}
+						</select>
+					{{else}}
+					<input type='hidden' name='did' value='{{$data.did}}'/>
+					{{if $v.pname==pro_time || $v.pname==add_time}}
+					<input id="d11" type="text" style="height:30px;" name="{{$v.pname}}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value='{{$data[$v.pname]}}' class='write'/>
+					<span class='notices' style='color:red;display:none;'>></span>
+					{{else}}
+					{{if $v.pname=="number"}}
+					<input type="text" name="{{$v.pname}}" class='dril' value="{{date('Ymd')}}"/>
+					{{else}}
+					{{if $v.pname=="islive"}}
+					<input type="text" name="{{$v.pname}}" class='dril' value="否"/>
+					{{else}}
+					<input type="text" name="{{$v.pname}}" class='dril write' value='{{$data[$v.pname]}}'{{if $v.pname==epc}}id="epc" value=" "{{/if}}style="{{if $v.pname==epc}}width:70%;{{else}}width:80%{{/if}}"/>
+					<span class='notices' style='color:red;display:none;'>></span>
+					{{if $v.pname==epc}}
+					<input type='button' id='single' value="扫描" class='green' style="width:10%;height:35px;"/>
+					{{/if}}
+					{{/if}}
+					{{/if}}
+					{{/if}}
+					{{/if}}
+				</td>
+			</tr>
+			{{/foreach}}
+			<tr>
+				<td><input type="submit" class='btn' value='确定上传'/></td>
+				<td><input type="reset" class='btn' value='重新填写'/></td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+	
+	
+	
+</div>
+</body>
+</html>

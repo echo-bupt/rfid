@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link href="{{$TPL}}/css/public.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{$TPL}}/js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="{{$TPL}}/js/public.js"></script>
+<body>
+<div id="map">
+	<span class='title'>维检记录</span>
+	<a class='btn btn-small-f edit' href="/service/serviceFindG" style='float:right;margin-top:10px;'>维修查询</a>
+</div>
+<div id="content" style="text-align:center;">
+	<a class="btn-small-f btn-mini btn-info" style="float:right;" href="/service/add">+</a>
+	<table id="table" class='table table-striped table-bordered'>
+		<thead>
+			<tr>
+				<th>设备编号</th>
+				<th>检修日期</th>
+				<th>检修地点</th>
+				<th>检测人员</th>
+				<th>维修人员</th>
+				<th>维修内容</th>
+				<th>评级</th>
+				<th>状态评估</th>
+				<th>使用建议</th>
+				<th>下一次检修日期</th>
+				<th style='width:25%;'>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 有信息的展示 没信息的增加一个 添加功能栏 -->
+			{{if $data}}
+				{{foreach $data child}}
+					<tr>
+						<td>
+							{{$child.epc}}
+						</td>
+						<td>
+							{{$child.time}}
+						</td>
+						<td>
+							{{$child.addr}}
+						</td>
+						<td>
+							{{$child.checker}}
+						</td>
+						<td>
+							{{$child.fixer}}
+						</td>
+						<td>
+							{{$child.content}}
+						</td>
+						<td>
+							{{$child.class}}
+						</td>
+						<td>
+							{{$child.state}}
+						</td>
+						<td>
+							{{$child.suggest}}
+						</td>
+						<td>
+							{{$child.next}}
+						</td>
+						<td>
+							<?php if($_SESSION['super']==1){?>
+							<a href="/service/edit/sid/{{$child.sid}}" class='btn btn-small-f'>编辑</a>
+							<?php }?>
+							<a href="/service/history/epc/{{$child.epc}}" class='btn btn-small-f'>历史维检记录</a>
+							<a href="/service/info/epc/{{$child.epc}}" class='btn btn-small-f'>钻具信息</a>
+							<a class='btn btn-small-f' href="/service/export/sid/{{$child.sid}}/epc/{{$child.epc}}">导出</a>
+							<?php if($_SESSION['super']==1){?>
+							<a class='del btn btn-small-f' href="/service/delete/sid/{{$child.sid}}" class='btn btn-small-f'>删除</a>
+							<?php }?>
+						</td>
+					</tr>
+				{{/foreach}}
+			{{else}}
+			<h2>暂时没有任何维检修信息，请点击<a href="/service/add">添加维检记录</a></h2>
+			{{/if}}
+		</tbody>
+	</table>
+	<div id='page'>
+		{{$page}}
+	</div>
+</div>
+</body>
+</html>
