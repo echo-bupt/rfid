@@ -29,7 +29,6 @@ class log{
 					mkdir($dir,0777,true);
 				}
 			//为了避免重复 实例化 这里 可以使用 静态类的方法 self::$intance="\core\log"
-			//但是应当能让该类执行、、但是 两次使用 :: 会报错、、
 			self::$instance=new \core\log\file();
 			}
 		}else{
