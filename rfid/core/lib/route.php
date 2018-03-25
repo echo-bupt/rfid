@@ -17,11 +17,10 @@ class route{
 		//PATH_INFO是有可能不存在的
 		//$_SERVER['REQUEST_URI'] 得到的是域名之后的所有内容 并且会带上 /
 		//即 不开启重写机制时 变为 /index.php/index/index 开启后 变为 /index/index 
-
-		//对 index.php 不开启重写机制、、$_SERVER['REQUEST_URI'] 变为/index.php/index
-		//但是他访问的确实是 index.php 只不过控制器与方法 出现了错误、、
+		//_SERVER['REQUEST_URI'] 变为/index.php/index
+		//访问的确实是 index.php 只不过控制器与方法 出现了错误、、
 		$pathI=$_SERVER['REQUEST_URI'];
-		//注意拆分、、/name/cc 那么两个 / 会被拆分为三份的、、所以将左边的/去掉 拆分为两份、、
+		//注意拆分、、/name/cc 两个 / 被拆分为三份、、将左边的/去掉 拆分为两份、、
 		$path=trim($pathI,"/");
 		$paths=array();
 		if($pathI!="/")
